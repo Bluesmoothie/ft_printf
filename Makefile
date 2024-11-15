@@ -1,42 +1,37 @@
-SRCS	= 	src/libftprintf.c
+NAME		= libftprintf.a
+INCLUDE		= include
+LIBFT		= libft
+SRC_DIR		= src/
+OBJ_DIR		= obj/
+CC			= gcc
+CFLAGS		= -Wall -Werror -Wextra -I
+RM			= rm -f
+AR			= ar rcs
 
-SRCS_B	=	$(SRCS) 
+SRC_FILES	=
 
-OBJS	= $(SRCS:.c=.o)
+SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-OBJS_B	= $(SRCS_B:.c=.o)
+all:		$(NAME)
 
-INCS	= inc
+$(NAME):	$(OBJ)
+			make -C $(LIBFT)
+			cp libft/libft.a .
+			mv libft.a $(NAME)
+			$(AR) $(NAME) $(OBJ)
 
-NAME	= libftprintf.a
-
-LIBC	= ar rc
-
-LIBR	= ranlib
-
-CC		= gcc
-
-RM		= rm -f
-
-CFLAGS	= -Wall -Wextra -Werror
-
-%c:%o
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
-
-$(NAME): $(OBJS)
-	$(LIBC) $(NAME) $(OBJS)
-	$(LIBR) $(NAME)
-
-bonus:	$(OBJS_B)
-	$(LIBC) $(NAME) $(OBJS_B)
-	$(LIBR) $(NAME)
-
-all: bonus
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_B)
+			$(RM) -rf $(OBJ_DIR)
+			make clean -C $(LIBFT)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			$(RM) -f $(NAME)
+			$(RM) -f $(LIBFT)/libft.a
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_pustr_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 18:28:34 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 18:29:45 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_putstr_fd(char *s, int fd)
 {
+	size_t	i;
 
+	i = 0;
+	while (s[i])
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
+	return ;
 }

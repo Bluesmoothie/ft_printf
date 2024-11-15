@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 14:24:26 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/12 14:37:21 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+size_t	ft_strlen(const char *s)
 {
+	size_t	len;
 
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }

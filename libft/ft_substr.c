@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:38:28 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 14:58:33 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*sub;
+	size_t	size;
 
+	if (start > ft_strlen(s))
+		size = 1;
+	else
+		size = ft_strlen(&s[start]) + 1;
+	if (size > len)
+		size = len + 1;
+	sub = malloc (sizeof(char) * size);
+	if (sub == NULL)
+		return (NULL);
+	if (start > ft_strlen(s))
+		sub[0] = '\0';
+	else
+		ft_strlcpy(sub, &s[start], size);
+	return (sub);
 }

@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:00:08 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 14:23:27 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
+	void	*array;
+	long	overflow;
 
+	overflow = nmemb * size;
+	if (overflow > MAX_INT)
+		return (NULL);
+	array = malloc (overflow);
+	if (array == NULL)
+		return (NULL);
+	ft_bzero (array, overflow);
+	return (array);
 }

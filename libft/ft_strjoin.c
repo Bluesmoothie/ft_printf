@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:59:56 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 15:14:23 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	size_t	size;
+	char	*join;
 
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	join = malloc (sizeof(char) * size);
+	if (join == NULL)
+		return (NULL);
+	ft_strlcpy(join, s1, ft_strlen(s1) + 1);
+	ft_strlcat(join, s2, size);
+	return (join);
 }

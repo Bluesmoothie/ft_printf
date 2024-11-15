@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 12:25:15 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 12:36:31 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
+	size_t			count;
 
+	count = 0;
+	while (count < n)
+	{
+		if (((unsigned char *)s)[count] == (unsigned char)c)
+			return ((void *)s + count);
+		count++;
+	}
+	return (NULL);
 }

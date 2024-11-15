@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 19:28:57 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/12 19:44:16 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+char	*ft_strchr(const char *s, int c)
 {
+	size_t	count;
 
+	count = 0;
+	while (c > 127)
+		c -= 128;
+	while (s[count] != '\0' && s[count] != c)
+		count++;
+	if (s[count] == c)
+		return ((char *)&s[count]);
+	else
+		return (NULL);
 }

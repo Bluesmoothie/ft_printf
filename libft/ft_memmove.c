@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 16:36:03 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 14:11:37 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-
+	if (dest == NULL && src == NULL)
+		return (dest);
+	if (dest < src)
+		ft_memcpy (dest, src, n);
+	else
+	{
+		while (n--)
+			((char *)dest)[n] = ((const char *)src)[n];
+	}
+	return (dest);
 }

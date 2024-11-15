@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 11:03:49 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 19:54:24 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 12:15:07 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
+	size_t	count;
 
+	count = 0;
+	if (n == 0)
+		return (0);
+	while (s1[count] != '\0' && s1[count] == s2[count] && count < n - 1)
+		count++;
+	return ((unsigned char)s1[count] - (unsigned char)s2[count]);
 }

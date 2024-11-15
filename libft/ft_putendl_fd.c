@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/14 17:54:19 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/14 10:26:08 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/14 10:31:27 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libft.h"
 
-int	ft_printf(const char *, ...);
+void	ft_putendl_fd(char *s, int fd)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
+	write (fd, "\n", 1);
+	return ;
+}
