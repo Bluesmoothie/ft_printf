@@ -6,11 +6,11 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 12:52:29 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/15 16:59:40 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libftprintf.h"
+#include "../include/ft_printf.h"
 
 static	int	handle_percent(const char *format, va_list *ap, int *i);
 
@@ -47,10 +47,27 @@ static int	handle_percent(const char *format, va_list *ap, int *i)
 		return (print_char(i, ap));
 	else if (format[*i] == 's')
 		return (print_string(i, ap));
+	else if (format[*i] == 'p')
+		return (print_pointer(i, ap));
+	else if (format[*i] == 'd')
+		return (print_decimal(i, ap));
+	else if (format[*i] == 'i')
+		return (print_integer(i, ap));
+	else if (format[*i] == 'u')
+		return (print_unsigned_decimal(i, ap));
+	else if (format[*i] == 'x' || format[*i] == 'X')
+		return (print_hex(i, ap, format[*i]));
 	return (0);
 }
+// #include <stdio.h>
+// #include <limits.h>
+// int	main(void)
+// {
+// 	int	a;
+// 	int	b;
 
-int	main(int argc, char *argv[])
-{
-	return (ft_printf(argv[1], argv[2]));
-}
+// 	a = printf(" %p %p \n", (void *)LONG_MIN, (void *)LONG_MAX);
+// 	b = ft_printf(" %p %p \n", (void *)LONG_MIN, (void *)LONG_MAX);
+// 	printf("return    printf = %d\nreturn ft_printf = %d\n", a, b);
+// 	return (0);
+// }

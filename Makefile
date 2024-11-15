@@ -1,14 +1,18 @@
-NAME		= libftprintf.a
-INCLUDE		= include
-LIBFT		= libft
-SRC_DIR		= src/
-OBJ_DIR		= obj/
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
-RM			= rm -f
-AR			= ar rcs
+NAME		=	libftprintf.a
+INCLUDE		=	include
+LIBFT		=	libft
+SRC_DIR		=	src/
+OBJ_DIR		=	obj/
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra -I
+RM			=	rm -f
+AR			=	ar rcs
 
-SRC_FILES	=
+SRC_FILES	=	libftprintf \
+				printer_1 \
+				printer_2 \
+				hex \
+				ft_uitoa
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -25,7 +29,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-			$(RM) -rf $(OBJ_DIR)
+			$(RM) -rf $(OBJ_DIR)/*
 			make clean -C $(LIBFT)
 
 fclean:		clean

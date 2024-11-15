@@ -6,23 +6,23 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 12:54:05 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/15 17:01:43 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libftprintf.h"
+#include "../include/ft_printf.h"
 
 int	print_percent(int *i)
 {
-	ft_putchar_fd('%', 1);
 	(*i) += 1;
+	ft_putchar_fd('%', 1);
 	return (1);
 }
 
 int	print_char(int *i, va_list *ap)
 {
-	ft_putchar_fd(*(va_arg(*ap, char *)), 1);
 	(*i) += 1;
+	ft_putchar_fd(va_arg(*ap, int), 1);
 	return (1);
 }
 
@@ -30,8 +30,51 @@ int	print_string(int *i, va_list *ap)
 {
 	char	*s;
 
-	s = va_arg(*ap, char *);
-	ft_putstr_fd(s, 1);
 	(*i) += 1;
-	return (ft_strlen(s));
+	s = va_arg(*ap, char *);
+	if (s == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	else
+	{
+		ft_putstr_fd(s, 1);
+		return (ft_strlen(s));
+	}
+}
+
+int	print_pointer(int *i, va_list *ap)
+{
+	int		j;
+	unsigned long long	val;
+
+	(*i) += 1;
+	val = va_arg(*ap, unsigned long long);
+	j = 0;
+	if (val == 0)
+	{
+		j += 5;
+		ft_putstr_fd("(nil)", 1);
+	}
+	else
+	{
+		j += 2;
+		ft_putstr_fd("0x", 1);
+		hex(val, LOW, &j);
+	}
+	return (j);
+}
+
+int	print_decimal(int *i, va_list *ap)
+{
+	char	*num;
+	int		size;
+
+	(*i) += 1;
+	num = ft_itoa(va_arg(*ap, int));
+	ft_putstr_fd(num, 1);
+	size = ft_strlen(num);
+	free(num);
+	return (size);
 }
