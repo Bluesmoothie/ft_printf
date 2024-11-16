@@ -19,17 +19,20 @@ OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ_DIR) $(OBJ)
 			make -C $(LIBFT)
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			$(AR) $(NAME) $(OBJ)
 
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-			$(RM) -rf $(OBJ_DIR)/*
+			$(RM) -rf $(OBJ_DIR)
 			make clean -C $(LIBFT)
 
 fclean:		clean
