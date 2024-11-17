@@ -6,14 +6,13 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/16 14:48:03 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/17 15:35:02 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
 static int	handle_percent(const char *format, va_list *ap, int *i);
-static int	handle_special(const char *format, va_list *ap, int *i);
 
 int	ft_printf(const char *format, ...)
 {
@@ -58,14 +57,7 @@ static int	handle_percent(const char *format, va_list *ap, int *i)
 		return (print_unsigned_decimal(i, ap));
 	else if (format[*i] == 'x' || format[*i] == 'X')
 		return (print_hex(i, ap, format[*i]));
-	else
-		return (handle_special(format, ap, i);
 	return (0);
-}
-
-static int	handle_special(const char *format, va_list *ap, int *i)
-{
-	if (format[*i] == '#')
 }
 
 // #include <stdio.h>
