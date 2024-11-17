@@ -6,7 +6,8 @@ OBJ_DIR		=	obj/
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -I
 RM			=	rm -f
-AR			=	ar rcs
+AR			=	ar rc
+RANLIB		=	ranlib
 
 SRC_FILES	=	libftprintf \
 				printer_1 \
@@ -24,6 +25,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			$(AR) $(NAME) $(OBJ)
+			$(RANLIB) $(NAME)
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
