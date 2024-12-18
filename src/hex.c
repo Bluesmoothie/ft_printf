@@ -6,11 +6,11 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:11:31 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 17:01:57 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/27 13:08:34 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include <ft_printf.h>
 
 void	hex(unsigned long long val, char format, int *i)
 {

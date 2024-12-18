@@ -6,11 +6,11 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:50:27 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/15 16:13:38 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/27 13:08:28 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include <ft_printf.h>
 
 static char	*alloc_reverse(char *input, int i);
 
