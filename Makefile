@@ -1,4 +1,4 @@
-.PHONY		:	all clean fclean re norme
+.PHONY		:	all clean fclean re norm
 
 NAME		=	libftprintf.a
 
@@ -39,7 +39,7 @@ $(BUILD_DIR)%.o	: $(SRC_DIR)%.c
 
 -include $(DEPS)
 
-norme			:
+norm	 		:
 				norminette $(SRC) $(INCLUDE)
 
 clean			:
