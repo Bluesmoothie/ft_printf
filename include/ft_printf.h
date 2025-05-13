@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/13 16:35:14 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/13 16:52:55 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_flags
 	bool	space;
 	bool	sign;
 }	t_flags;
-
 
 //libftprintf.c
 int		ft_printf(const char *format, ...);

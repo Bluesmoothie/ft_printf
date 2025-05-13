@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/13 16:52:25 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/13 16:52:48 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_flags	get_flags(char *format, int *i)
 static bool	flags_present(char format)
 {
 	return (format == '#' || format == ' ' || format == '+' || format == '-'
-			|| format == '0' || format == '.');
+		|| format == '0' || format == '.');
 }
 
 static size_t	flag_value(char *format, int *i)
