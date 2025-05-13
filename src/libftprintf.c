@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/02/07 19:54:32 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/13 16:33:30 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ft_printf(const char *format, ...)
 
 static int	handle_percent(const char *format, va_list *ap, int *i)
 {
-	(*i) += 1;
+	const t_flags	flags = get_flags(format, i);
+
 	if (format[*i] == '%')
 		return (print_percent(i));
 	else if (format[*i] == 'c')
