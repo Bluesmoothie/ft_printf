@@ -25,6 +25,7 @@ SRC_FILES	=	libftprintf	\
 				printer_2	\
 				hex			\
 				flags		\
+				flags_func	\
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(BUILD_DIR), $(addsuffix .o, $(SRC_FILES)))

@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer_2.c                                        :+:      :+:    :+:   */
+/*   flags_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 13:34:33 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/15 13:36:58 by ygille           ###   ########.fr       */
+/*   Created: 2025/05/15 15:59:10 by ygille            #+#    #+#             */
+/*   Updated: 2025/05/15 16:12:02 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_integer(int *i, va_list *ap)
+int	adjust(int just_size, int len, char character)
 {
-	return (print_decimal(i, ap));
-}
+	const int	diff = just_size - len;
+	int			i;
 
-int	print_unsigned_decimal(int *i, va_list *ap)
-{
-	char	*num;
-	int		size;
-
-	(*i) += 1;
-	num = ft_uitoa(va_arg(*ap, unsigned int));
-	ft_putstr_fd(num, STDOUT_FILENO);
-	size = ft_strlen(num);
-	free(num);
-	return (size);
-}
-
-int	print_hex(int *i, va_list *ap, char format)
-{
-	int	j;
-
-	(*i) += 1;
-	j = 0;
-	hex(va_arg(*ap, unsigned int), format, &j);
-	return (j);
+	i = 0;
+	if (diff > 0)
+		i = diff;
+	while (i)
+	{
+		ft_putchar_fd(character, STDOUT_FILENO);
+		i--;
+	}
+	if (diff > 0)
+		return (diff);
+	return (0);
 }

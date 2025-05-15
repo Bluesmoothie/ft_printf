@@ -6,16 +6,16 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/13 16:52:48 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/15 13:48:30 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static bool		flags_present(char format);
-static size_t	flag_value(char *format, int *i);
+static bool		flags_present(const char format);
+static size_t	flag_value(const char *format, int *i);
 
-t_flags	get_flags(char *format, int *i)
+t_flags	get_flags(const char *format, int *i)
 {
 	t_flags	flags;
 
@@ -30,26 +30,33 @@ t_flags	get_flags(char *format, int *i)
 		else if (format[*i] == '+')
 			flags.sign = true;
 		else if (format[*i] == '-')
-			flags.left_just = true;
+			flags.left_just = flag_value(format, i);
 		else if (format[*i] == '0')
 			flags.zeros = flag_value(format, i);
 		else if (format[*i] == '.')
 			flags.accuracy = flag_value(format, i);
+		else if (ft_isdigit(format[*i]))
+			flags.right_just = flag_value(format, i);
 		(*i)++;
 	}
+	return (flags);
 }
 
-static bool	flags_present(char format)
+static bool	flags_present(const char format)
 {
 	return (format == '#' || format == ' ' || format == '+' || format == '-'
-		|| format == '0' || format == '.');
+		|| format == '0' || format == '.' || ft_isdigit(format));
 }
 
-static size_t	flag_value(char *format, int *i)
+static size_t	flag_value(const char *format, int *i)
 {
-	const size_t	val = ft_atoi(&format[*i + 1]);
+	size_t	val;
 
+	if (!ft_isdigit(format[*i]))
+		(*i)++;
+	val = ft_atoi(&format[(*i)]);
 	while (format[*i] && ft_isdigit(format[*i]))
 		(*i)++;
+	(*i)--;
 	return (val);
 }
