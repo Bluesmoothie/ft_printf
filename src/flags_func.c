@@ -6,13 +6,13 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:59:10 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 01:05:11 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/17 01:18:29 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	adjust(int just_size, int len, char character);
+static int	adjust(int just_size, int len, char c);
 static int	trunc(t_flags flags, char *str, int len);
 
 int	ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd)
@@ -20,9 +20,13 @@ int	ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd)
 	int	p;
 
 	len = trunc(flags, str, len);
-	p = adjust(flags.right_just, len, ' ');
+	if (flags.right_just || flags.left_just)
+		p = adjust(flags.right_just, len, ' ');
+	else
+		p = adjust(flags.right_just, len, '0');
 	ft_putstr_fd(str, fd);
-	p += adjust(flags.left_just, len, ' ');
+	if (flags.left_just)
+		p += adjust(flags.left_just, len, ' ');
 	return (p + len);
 }
 
@@ -46,20 +50,12 @@ int	ft_putstr_fd_zero(t_flags flags, char *str, int len, int fd)
 		ft_putchar_fd(*str, fd);
 		str++;
 	}
-	if (flags.zeros)
-		p = adjust(flags.zeros, len, '0');
-	else if (flags.accuracy != -1)
-	{
-		if (*(str - 1) == '-')
-			p = adjust(flags.accuracy, len - 1, '0');
-		else
-			p = adjust(flags.accuracy, len, '0');
-	}
+	p = adjust(flags.zeros, len, '0');
 	ft_putstr_fd(str, fd);
 	return (p + len);
 }
 
-static int	adjust(int just_size, int len, char character)
+static int	adjust(int just_size, int len, char c)
 {
 	const int	diff = just_size - len;
 	int			i;
@@ -69,7 +65,7 @@ static int	adjust(int just_size, int len, char character)
 		i = diff;
 	while (i)
 	{
-		ft_putchar_fd(character, STDOUT_FILENO);
+		ft_putchar_fd(c, STDOUT_FILENO);
 		i--;
 	}
 	if (diff > 0)
