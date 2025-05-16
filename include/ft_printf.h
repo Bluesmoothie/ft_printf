@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/15 16:16:20 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 14:47:50 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,25 @@ typedef struct s_flags
 int		ft_printf(const char *format, ...);
 
 //hex.c
-void	hex(unsigned long long val, char format, int *i);
+int		hex_helper(unsigned long long val, char format, t_flags flags, bool suffix);
 
 //printer_1.c
 int		print_percent(int *i);
 int		print_char(int *i, va_list *ap, t_flags flags);
 int		print_string(int *i, va_list *ap, t_flags flags);
-int		print_pointer(int *i, va_list *ap);
-int		print_decimal(int *i, va_list *ap);
+int		print_pointer(int *i, va_list *ap, t_flags flags);
+int		print_decimal(int *i, va_list *ap, t_flags flags);
 
 //printer_2.c
-int		print_integer(int *i, va_list *ap);
-int		print_unsigned_decimal(int *i, va_list *ap);
-int		print_hex(int *i, va_list *ap, char format);
+int		print_integer(int *i, va_list *ap, t_flags flags);
+int		print_unsigned_decimal(int *i, va_list *ap, t_flags flags);
+int		print_hex(int *i, va_list *ap, char format, t_flags flags);
 
 //flags.c
 t_flags	get_flags(const char *format, int *i);
 
 //flags_func.c
-int		adjust(int just_size, int len, char character);
+int		ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd);
+int		ft_putchar_fd_adjust(t_flags flags, char c, int fd);
 
 #endif

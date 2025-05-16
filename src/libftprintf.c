@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/15 16:16:29 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 14:48:31 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static int	handle_percent(const char *format, va_list *ap, int *i)
 	else if (format[*i] == 's')
 		return (print_string(i, ap, flags));
 	else if (format[*i] == 'p')
-		return (print_pointer(i, ap));
+		return (print_pointer(i, ap, flags));
 	else if (format[*i] == 'd')
-		return (print_decimal(i, ap));
+		return (print_decimal(i, ap, flags));
 	else if (format[*i] == 'i')
-		return (print_integer(i, ap));
+		return (print_integer(i, ap, flags));
 	else if (format[*i] == 'u')
-		return (print_unsigned_decimal(i, ap));
+		return (print_unsigned_decimal(i, ap, flags));
 	else if (format[*i] == 'x' || format[*i] == 'X')
-		return (print_hex(i, ap, format[*i]));
+		return (print_hex(i, ap, format[*i], flags));
 	return (0);
 }

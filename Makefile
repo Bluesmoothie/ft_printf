@@ -5,7 +5,7 @@ NAME		=	libftprintf.a
 #			GCC
 
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -MMD -MP -I $(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra -MMD -MP -I $(INCLUDE) -g3
 
 #			COMMON
 
