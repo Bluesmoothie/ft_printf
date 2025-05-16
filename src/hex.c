@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:11:31 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 13:30:19 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:54:23 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	hex(unsigned long long val, char format);
 
-int	hex_helper(unsigned long long val, char format, t_flags flags, bool suffix)
+char	*hex_helper(unsigned long long val, char format, bool suffix)
 {
 	int		i;
 	char	ptr[19];
@@ -34,7 +34,7 @@ int	hex_helper(unsigned long long val, char format, t_flags flags, bool suffix)
 		ptr[--i] = 'x';
 		ptr[--i] = '0';
 	}
-	return (ft_putstr_fd_adjust(flags, &ptr[i], 18 - i, STDOUT_FILENO));
+	return (ft_strdup(&ptr[i]));
 }
 
 static char	hex(unsigned long long val, char format)

@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 14:47:29 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:59:09 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,23 @@ int	print_pointer(int *i, va_list *ap, t_flags flags)
 {
 	int					p;
 	unsigned long long	val;
+	char				*num;
 
 	(*i)++;
 	val = va_arg(*ap, unsigned long long);
 	if (val == 0)
 		p = ft_putstr_fd_adjust(flags, "(nil)", 5, STDOUT_FILENO);
 	else
-		p = hex_helper(val, LOW, flags, true);
+	{
+		num = hex_helper(val, LOW, true);
+		if (!num)
+			return (0);
+		if (flags.left_just || flags.right_just)
+			p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
+		else
+			p = ft_putstr_fd_zero(flags, num, ft_strlen(num), STDOUT_FILENO);
+		free(num);
+	}
 	return (p);
 }
 
@@ -63,7 +73,10 @@ int	print_decimal(int *i, va_list *ap, t_flags flags)
 
 	(*i)++;
 	num = ft_itoa(va_arg(*ap, int));
-	p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
+	if (flags.left_just || flags.right_just)
+		p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
+	else
+		p = ft_putstr_fd_zero(flags, num, ft_strlen(num), STDOUT_FILENO);
 	free(num);
 	return (p);
 }
