@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 14:47:50 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 14:51:40 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_flags
 int		ft_printf(const char *format, ...);
 
 //hex.c
-int		hex_helper(unsigned long long val, char format, t_flags flags, bool suffix);
+int		hex_helper(unsigned long long val, char format, t_flags flags,
+			bool suffix);
 
 //printer_1.c
 int		print_percent(int *i);
