@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:11:31 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 16:54:23 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 21:16:11 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ char	*hex_helper(unsigned long long val, char format, bool suffix)
 	i = 18;
 	ptr[i] = '\0';
 	if (!val)
+	{
 		ptr[--i] = '0';
+		suffix = false;
+	}
 	while (val)
 	{
 		i--;
@@ -31,7 +34,7 @@ char	*hex_helper(unsigned long long val, char format, bool suffix)
 	}
 	if (suffix)
 	{
-		ptr[--i] = 'x';
+		ptr[--i] = format;
 		ptr[--i] = '0';
 	}
 	return (ft_strdup(&ptr[i]));

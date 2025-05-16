@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:34:33 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 16:54:39 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 21:16:04 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	print_hex(int *i, va_list *ap, char format, t_flags flags)
 	char	*num;
 
 	(*i)++;
-	num = hex_helper(va_arg(*ap, unsigned int), format, false);
+	num = hex_helper(va_arg(*ap, unsigned int), format, flags.alt_form);
 	if (!num)
 		return (0);
 	if (flags.left_just || flags.right_just)
