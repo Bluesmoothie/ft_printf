@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 23:17:44 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/17 01:06:48 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	print_percent(int *i)
 
 int	print_char(int *i, va_list *ap, t_flags flags)
 {
-	int	p;
+	int		p;
 
 	(*i)++;
 	p = ft_putchar_fd_adjust(flags, va_arg(*ap, int), STDOUT_FILENO);
@@ -37,19 +37,9 @@ int	print_string(int *i, va_list *ap, t_flags flags)
 	s = va_arg(*ap, char *);
 	p = 0;
 	if (s == NULL)
-	{
-		if (flags.accuracy == -1)
-			p = ft_putstr_fd_adjust(flags, "(null)", 6, STDOUT_FILENO);
-		else if (flags.accuracy >= 6)
-			p = ft_putstr_fd_trunc("(null)", STDOUT_FILENO, flags, 6);
-	}
+		p = ft_putstr_fd_adjust(flags, "(null)", 6, STDOUT_FILENO);
 	else
-	{
-		if (flags.accuracy == -1)
-			p = ft_putstr_fd_adjust(flags, s, ft_strlen(s), STDOUT_FILENO);
-		else
-			p = ft_putstr_fd_trunc(s, STDOUT_FILENO, flags, ft_strlen(s));
-	}
+		p = ft_putstr_fd_adjust(flags, s, ft_strlen(s), STDOUT_FILENO);
 	return (p);
 }
 
@@ -68,10 +58,7 @@ int	print_pointer(int *i, va_list *ap, t_flags flags)
 		num = hex_helper(val, LOW, true);
 		if (!num)
 			return (0);
-		if (flags.left_just || flags.right_just)
-			p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
-		else
-			p = ft_putstr_fd_zero(flags, num, ft_strlen(num), STDOUT_FILENO);
+		p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
 		free(num);
 	}
 	return (p);
@@ -87,10 +74,7 @@ int	print_decimal(int *i, va_list *ap, t_flags flags)
 	num = ft_itoa(va_arg(*ap, int));
 	len = ft_strlen(num);
 	len += sign_flags(flags, num, STDOUT_FILENO);
-	if (flags.left_just || flags.right_just)
-		p = ft_putstr_fd_adjust(flags, num, len, STDOUT_FILENO);
-	else
-		p = ft_putstr_fd_zero(flags, num, len, STDOUT_FILENO);
+	p = ft_putstr_fd_adjust(flags, num, len, STDOUT_FILENO);
 	free(num);
 	return (p);
 }
