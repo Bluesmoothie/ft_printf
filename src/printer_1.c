@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 16:59:09 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 21:29:28 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,18 @@ int	print_pointer(int *i, va_list *ap, t_flags flags)
 
 int	print_decimal(int *i, va_list *ap, t_flags flags)
 {
-	char	*num;
+	int		len;
 	int		p;
+	char	*num;
 
 	(*i)++;
 	num = ft_itoa(va_arg(*ap, int));
+	len = ft_strlen(num);
+	len += sign_flags(flags, num, STDOUT_FILENO);
 	if (flags.left_just || flags.right_just)
-		p = ft_putstr_fd_adjust(flags, num, ft_strlen(num), STDOUT_FILENO);
+		p = ft_putstr_fd_adjust(flags, num, len, STDOUT_FILENO);
 	else
-		p = ft_putstr_fd_zero(flags, num, ft_strlen(num), STDOUT_FILENO);
+		p = ft_putstr_fd_zero(flags, num, len, STDOUT_FILENO);
 	free(num);
 	return (p);
 }
