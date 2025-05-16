@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/15 13:48:30 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 23:22:12 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_flags	get_flags(const char *format, int *i)
 
 	(*i)++;
 	ft_bzero(&flags, sizeof(t_flags));
+	flags.accuracy = -1;
 	while (flags_present(format[*i]))
 	{
 		if (format[*i] == '#')
@@ -59,4 +60,26 @@ static size_t	flag_value(const char *format, int *i)
 		(*i)++;
 	(*i)--;
 	return (val);
+}
+
+int	ft_putstr_fd_trunc(char *str, int fd, t_flags flags, int len)
+{
+	int	p;
+
+	if (flags.accuracy != -1 && len > flags.accuracy)
+	{
+		write(fd, str, flags.accuracy);
+		p = flags.accuracy;
+	}
+	else
+	{
+		ft_putstr_fd(str, fd);
+		p = len;
+	}
+	while (flags.right_just > p)
+	{
+		ft_putchar_fd(' ', fd);
+		flags.left_just--;
+	}
+	return (p);
 }

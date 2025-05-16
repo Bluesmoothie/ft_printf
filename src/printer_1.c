@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 21:29:28 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 23:17:44 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,21 @@ int	print_string(int *i, va_list *ap, t_flags flags)
 
 	(*i)++;
 	s = va_arg(*ap, char *);
+	p = 0;
 	if (s == NULL)
-		p = ft_putstr_fd_adjust(flags, "(null)", 6, STDOUT_FILENO);
+	{
+		if (flags.accuracy == -1)
+			p = ft_putstr_fd_adjust(flags, "(null)", 6, STDOUT_FILENO);
+		else if (flags.accuracy >= 6)
+			p = ft_putstr_fd_trunc("(null)", STDOUT_FILENO, flags, 6);
+	}
 	else
-		p = ft_putstr_fd_adjust(flags, s, ft_strlen(s), STDOUT_FILENO);
+	{
+		if (flags.accuracy == -1)
+			p = ft_putstr_fd_adjust(flags, s, ft_strlen(s), STDOUT_FILENO);
+		else
+			p = ft_putstr_fd_trunc(s, STDOUT_FILENO, flags, ft_strlen(s));
+	}
 	return (p);
 }
 

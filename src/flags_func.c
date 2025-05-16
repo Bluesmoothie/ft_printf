@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:59:10 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 21:29:53 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/16 23:05:41 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,21 @@ int	ft_putstr_fd_zero(t_flags flags, char *str, int len, int fd)
 {
 	int	p;
 
+	p = 0;
 	if (*str == '-')
 	{
 		ft_putchar_fd(*str, fd);
 		str++;
 	}
-	p = adjust(flags.zeros, len, '0');
+	if (flags.zeros)
+		p = adjust(flags.zeros, len, '0');
+	else if (flags.accuracy != -1)
+	{
+		if (*(str - 1) == '-')
+			p = adjust(flags.accuracy, len - 1, '0');
+		else
+			p = adjust(flags.accuracy, len, '0');
+	}
 	ft_putstr_fd(str, fd);
 	return (p + len);
 }
