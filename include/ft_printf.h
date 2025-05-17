@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 01:05:19 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/17 16:37:23 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_flags
 	bool	alt_form;
 	bool	space;
 	bool	sign;
+	char	format;
 }	t_flags;
 
 //libftprintf.c
@@ -54,10 +55,10 @@ int		sign_flags(t_flags flags, char *str, int fd);
 
 //flags.c
 t_flags	get_flags(const char *format, int *i);
+bool	is_numeric(char f);
 
 //flags_func.c
 int		ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd);
 int		ft_putchar_fd_adjust(t_flags flags, char c, int fd);
-int		ft_putstr_fd_zero(t_flags flags, char *str, int len, int fd);
 
 #endif

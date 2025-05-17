@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/16 14:48:31 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/17 16:42:01 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			ft_putchar_fd(format[i], 1);
+			ft_putchar_fd(format[i], STDOUT_FILENO);
 			j++;
 			i++;
 		}

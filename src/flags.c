@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 00:49:40 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/17 16:16:42 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_flags	get_flags(const char *format, int *i)
 			flags.right_just = flag_value(format, i);
 		(*i)++;
 	}
+	flags.format = format[*i];
 	return (flags);
 }
 
@@ -60,4 +61,9 @@ static size_t	flag_value(const char *format, int *i)
 		(*i)++;
 	(*i)--;
 	return (val);
+}
+
+bool	is_numeric(char f)
+{
+	return (f == 'd' || f == 'i' || f == 'u' || f == 'x' || f == 'X');
 }
