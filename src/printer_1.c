@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:49:38 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:31:48 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 13:11:14 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	print_string(int *i, va_list *ap, t_flags flags)
 	s = va_arg(*ap, char *);
 	p = 0;
 	if (s == NULL)
+	{
+		flags.null = true;
 		p = ft_putstr_fd_adjust(flags, "(null)", 6, flags.fd);
+	}
 	else
 		p = ft_putstr_fd_adjust(flags, s, ft_strlen(s), flags.fd);
 	return (p);

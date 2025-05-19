@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:38:57 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 13:10:53 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_flags
 	bool	alt_form;
 	bool	space;
 	bool	sign;
+	bool	null;
 	char	format;
 }	t_flags;
 

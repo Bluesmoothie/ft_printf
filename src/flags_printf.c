@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 12:29:23 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:51:31 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 13:20:14 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,41 +49,20 @@ static int	ft_putstr_fd_adjust_numeric(t_flags flags, char *str, int len, int fd
 
 	p = 0;
 	i = 0;
-	str = ft_strdup(str);
-	if (!str)
-		return (0);
-	if (flags.right_just || flags.left_just)
+	if (flags.accuracy > len)
+		p += adjust(flags.accuracy, len, '0', fd);
+	if (flags.right_just)
 		p += adjust(flags.right_just, len, ' ', fd);
-	if (*str == '-')
-	{
-		ft_putchar_fd(str[i++], fd);
-		p++;
-		len--;
-	}
-	if (flags.zeros && *str == '-')
-		p += adjust(flags.zeros, len + 1, '0', fd);
 	else if (flags.zeros)
 		p += adjust(flags.zeros, len, '0', fd);
 	ft_putstr_fd(&str[i], fd);
 	if (flags.left_just)
 		p += adjust(flags.left_just, len, ' ', fd);
-	free (str);
 	return (p + len);
 }
 
 static t_flags	modif_flags(t_flags flags, int len)
 {
-	if (!flags.zeros && flags.accuracy != -1)
-		flags.zeros = flags.accuracy;
-	else if (flags.zeros && flags.accuracy != -1)
-	{
-		if (flags.accuracy < flags.zeros)
-		{
-			flags.right_just = flags.zeros - flags.accuracy +len;
-			flags.zeros = flags.accuracy;
-		}
-		else
-			flags.zeros = flags.accuracy;
-	}
+	(void)len;
 	return (flags);
 }

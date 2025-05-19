@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:59:10 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:38:53 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 13:13:00 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	adjust(int just_size, int len, char c, int fd)
 
 int	ft_trunc(t_flags flags, char **str, int len)
 {
+	if (flags.null && flags.accuracy != -1 && flags.accuracy < len)
+	{
+		*str = NULL;
+		return (0);
+	}
 	if (flags.accuracy != -1 && len > flags.accuracy)
 	{
 		*str = ft_substr(*str, 0, flags.accuracy);
