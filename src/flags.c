@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:05:29 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 15:07:56 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static bool		flags_present(const char format);
 static size_t	flag_value(const char *format, int *i);
+static char		*extract_value(const char *format, int *i);
 
 t_flags	get_flags(const char *format, int *i)
 {
@@ -53,7 +54,17 @@ static bool	flags_present(const char format)
 static size_t	flag_value(const char *format, int *i)
 {
 	size_t	val;
+	char	*str_val;
 
+	if (format[*i] == '0')
+	{
+		(*i)++;
+		str_val = extract_value(format, i);
+		val = ft_atoi(str_val);
+		free(str_val);
+		(*i)--;
+		return (val);
+	}
 	if (!ft_isdigit(format[*i]))
 		(*i)++;
 	val = ft_atoi(&format[(*i)]);
@@ -66,4 +77,16 @@ static size_t	flag_value(const char *format, int *i)
 bool	is_numeric(char f)
 {
 	return (f == 'd' || f == 'i' || f == 'u' || f == 'x' || f == 'X');
+}
+
+static char	*extract_value(const char *format, int *i)
+{
+	int	start;
+
+	start = *i;
+	if (format[*i] == '0')
+		return (ft_substr(format, start, ++(*i)));
+	while (format[*i] && ft_isdigit(format[*i]))
+		(*i)++;
+	return (ft_substr(format, start, (*i) - start));
 }
