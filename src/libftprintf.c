@@ -6,13 +6,13 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 16:42:01 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:05:21 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	handle_percent(const char *format, va_list *ap, int *i);
+static int	handle_percent(const char *format, va_list *ap, int *i, int fd);
 
 /*
 ** Like the real printf
@@ -37,18 +37,47 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 		else
-			j += handle_percent(format, &ap, &i);
+			j += handle_percent(format, &ap, &i, STDOUT_FILENO);
 	}
 	va_end(ap);
 	return (j);
 }
 
-static int	handle_percent(const char *format, va_list *ap, int *i)
+/*
+** Similar but print out to fd
+*/
+int	ft_dprintf(int fd, const char *format, ...)
 {
-	const t_flags	flags = get_flags(format, i);
+	va_list	ap;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
+	va_start(ap, format);
+	while (format[i])
+	{
+		if (format[i] != '%')
+		{
+			ft_putchar_fd(format[i], fd);
+			j++;
+			i++;
+		}
+		else
+			j += handle_percent(format, &ap, &i, fd);
+	}
+	va_end(ap);
+	return (j);
+}
+
+static int	handle_percent(const char *format, va_list *ap, int *i, int fd)
+{
+	t_flags	flags;
+
+	flags = get_flags(format, i);
+	flags.fd = fd;
 	if (format[*i] == '%')
-		return (print_percent(i));
+		return (print_percent(i, flags));
 	else if (format[*i] == 'c')
 		return (print_char(i, ap, flags));
 	else if (format[*i] == 's')

@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:59:10 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 16:43:36 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:05:55 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ static int	adjust(int just_size, int len, char c, int fd)
 		return (diff);
 	return (0);
 }
+
 static int	trunc(t_flags flags, char **str, int len)
 {
-	if (!is_numeric(flags.format) && flags.accuracy != -1 && len > flags.accuracy)
+	if (!is_numeric(flags.format)
+		&& flags.accuracy != -1 && len > flags.accuracy)
 	{
 		*str = ft_substr(*str, 0, flags.accuracy);
 		return (flags.accuracy);

@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/17 16:37:23 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:05:26 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_flags
 {
+	int		fd;
 	int		zeros;
 	int		accuracy;
 	int		left_just;
@@ -36,12 +37,13 @@ typedef struct s_flags
 
 //libftprintf.c
 int		ft_printf(const char *format, ...);
+int		ft_dprintf(int fd, const char *format, ...);
 
 //hex.c
 char	*hex_helper(unsigned long long val, char format, bool suffix);
 
 //printer_1.c
-int		print_percent(int *i);
+int		print_percent(int *i, t_flags flags);
 int		print_char(int *i, va_list *ap, t_flags flags);
 int		print_string(int *i, va_list *ap, t_flags flags);
 int		print_pointer(int *i, va_list *ap, t_flags flags);
