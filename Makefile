@@ -20,12 +20,13 @@ LIBFT_A			=	$(addprefix $(LIBFT), libft.a)
 
 #			SRC
 
-SRC_FILES	=	libftprintf	\
-				printer_1	\
-				printer_2	\
-				hex			\
-				flags		\
-				flags_func	\
+SRC_FILES	=	libftprintf		\
+				printer_1		\
+				printer_2		\
+				hex				\
+				flags			\
+				flags_func		\
+				flags_printf	\
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(BUILD_DIR), $(addsuffix .o, $(SRC_FILES)))

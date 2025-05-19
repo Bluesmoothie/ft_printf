@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:36:59 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:05:26 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:38:57 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ t_flags	get_flags(const char *format, int *i);
 bool	is_numeric(char f);
 
 //flags_func.c
-int		ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd);
+int		adjust(int just_size, int len, char c, int fd);
+int		ft_trunc(t_flags flags, char **str, int len);
 int		ft_putchar_fd_adjust(t_flags flags, char c, int fd);
+
+//flags_printf.c
+int		ft_putstr_fd_adjust(t_flags flags, char *str, int len, int fd);
 
 #endif

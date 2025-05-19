@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:11:39 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:13:47 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ static int	handle_percent(const char *format, va_list *ap, int *i, int fd);
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		printed;
 
 	va_start(ap, format);
-	printed = ft_printf_loop(STDOUT_FILENO, format, &ap);
-	va_end(ap);
-	return (printed);
+	return (ft_printf_loop(STDOUT_FILENO, format, &ap));
 }
 
 /*
@@ -37,12 +34,9 @@ int	ft_printf(const char *format, ...)
 int	ft_dprintf(int fd, const char *format, ...)
 {
 	va_list	ap;
-	int		printed;
 
 	va_start(ap, format);
-	printed = ft_printf_loop(fd, format, &ap);
-	va_end(ap);
-	return (printed);
+	return (ft_printf_loop(fd, format, &ap));
 }
 
 static int	ft_printf_loop(int fd, const char *format, va_list *ap)
@@ -63,6 +57,7 @@ static int	ft_printf_loop(int fd, const char *format, va_list *ap)
 		else
 			j += handle_percent(format, ap, &i, fd);
 	}
+	va_end(*ap);
 	return (j);
 }
 
