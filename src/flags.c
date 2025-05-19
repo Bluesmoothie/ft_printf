@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:31:00 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 15:07:56 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 17:16:42 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,16 @@ bool	is_numeric(char f)
 
 static char	*extract_value(const char *format, int *i)
 {
-	int	start;
+	int		start;
+	char	*r;
 
 	start = *i;
 	if (format[*i] == '0')
-		return (ft_substr(format, start, ++(*i)));
+	{
+		r = ft_substr(format, start, (*i) - 1);
+		(*i)++;
+		return (r);
+	}
 	while (format[*i] && ft_isdigit(format[*i]))
 		(*i)++;
 	return (ft_substr(format, start, (*i) - start));
