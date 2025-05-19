@@ -6,12 +6,13 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:42:13 by ygille            #+#    #+#             */
-/*   Updated: 2025/05/19 12:05:21 by ygille           ###   ########.fr       */
+/*   Updated: 2025/05/19 12:11:39 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	ft_printf_loop(int fd, const char *format, va_list *ap);
 static int	handle_percent(const char *format, va_list *ap, int *i, int fd);
 
 /*
@@ -22,25 +23,12 @@ static int	handle_percent(const char *format, va_list *ap, int *i, int fd);
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		i;
-	int		j;
+	int		printed;
 
-	i = 0;
-	j = 0;
 	va_start(ap, format);
-	while (format[i])
-	{
-		if (format[i] != '%')
-		{
-			ft_putchar_fd(format[i], STDOUT_FILENO);
-			j++;
-			i++;
-		}
-		else
-			j += handle_percent(format, &ap, &i, STDOUT_FILENO);
-	}
+	printed = ft_printf_loop(STDOUT_FILENO, format, &ap);
 	va_end(ap);
-	return (j);
+	return (printed);
 }
 
 /*
@@ -49,12 +37,21 @@ int	ft_printf(const char *format, ...)
 int	ft_dprintf(int fd, const char *format, ...)
 {
 	va_list	ap;
+	int		printed;
+
+	va_start(ap, format);
+	printed = ft_printf_loop(fd, format, &ap);
+	va_end(ap);
+	return (printed);
+}
+
+static int	ft_printf_loop(int fd, const char *format, va_list *ap)
+{
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	va_start(ap, format);
 	while (format[i])
 	{
 		if (format[i] != '%')
@@ -64,9 +61,8 @@ int	ft_dprintf(int fd, const char *format, ...)
 			i++;
 		}
 		else
-			j += handle_percent(format, &ap, &i, fd);
+			j += handle_percent(format, ap, &i, fd);
 	}
-	va_end(ap);
 	return (j);
 }
 
